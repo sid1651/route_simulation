@@ -1,4 +1,4 @@
-import Route from "../models/Route.js";
+import Route from "../model/Route.js";
 import { simulateRoute } from "../services/simulation.service.js";
 
 export const createRoute = async (req, res) => {
@@ -36,4 +36,9 @@ export const simulate = async (req, res) => {
     console.error("Simulation Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
+};
+
+export const getAllRoutes = async (req, res) => {
+  const routes = await Route.find().sort({ createdAt: -1 });
+  res.json(routes);
 };
